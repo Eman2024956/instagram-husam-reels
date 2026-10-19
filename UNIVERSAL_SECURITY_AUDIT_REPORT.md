@@ -1,8 +1,8 @@
 # 🛡️ Universal Defensive Security Audit Report
 
 **Target Directory:** `/Users/falahgatea/insta_reels`  
-**Audit Date:** 2026-10-19 18:19:19  
-**Live URL Target:** `None`  
+**Audit Date:** 2026-10-19 18:27:59  
+**Live URL Target:** `https://insta-husam-reels.vercel.app`  
 **Scanner Version:** 2.0.0 Enterprise Unified  
 
 ---
@@ -11,9 +11,9 @@
 
 | Metric | Result |
 |---|---|
-| **Overall Security Score** | **90%** |
-| **Total Checks** | 10 |
-| **Passed (✅)** | 9 |
+| **Overall Security Score** | **92%** |
+| **Total Checks** | 14 |
+| **Passed (✅)** | 13 |
 | **Warnings (⚠️)** | 1 |
 | **Failures (❌)** | 0 |
 
@@ -38,3 +38,10 @@
 
 ### 6. Backend Services & Authorization APIs
 
+
+### 7. Live Passive HTTP Security Audit (DAST)
+
+- **✅ PASS** | **Live HSTS**: Strict-Transport-Security header present in live response.
+- **✅ PASS** | **Live MIME Sniffing**: nosniff header verified.
+- **✅ PASS** | **Live Clickjacking Defense**: X-Frame-Options verified.
+- **✅ PASS** | **Live CSP**: Content-Security-Policy active on live domain.

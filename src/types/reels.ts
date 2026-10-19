@@ -22,9 +22,10 @@ export interface InstagramReel {
 }
 
 export interface ScrapeFilterOptions {
-  username: string;
-  startDate: string; // YYYY-MM-DD
-  endDate: string; // YYYY-MM-DD
+  subject?: string; // Subject / Topic / Keyword entered by customer
+  username?: string;
+  startDate?: string; // YYYY-MM-DD
+  endDate?: string; // YYYY-MM-DD
   resultsLimit: number;
   skipPinnedPosts: boolean;
   useDemo?: boolean;

@@ -34,9 +34,10 @@ export default function Home() {
   // Modals
   const [selectedReel, setSelectedReel] = useState<InstagramReel | null>(null);
 
-  // Load initial sample reels on first mount
+  // Load initial sample reels on first mount (loads all diverse subjects)
   useEffect(() => {
     fetchScrapeData({
+      subject: "",
       username: "",
       startDate: "",
       endDate: "",
@@ -47,6 +48,7 @@ export default function Home() {
   }, []);
 
   const fetchScrapeData = async (params: {
+    subject?: string;
     username: string;
     startDate: string;
     endDate: string;
@@ -77,6 +79,8 @@ export default function Home() {
       } else {
         setReels(json.data || []);
         setStats(json.stats);
+        setSearchQuery("");
+        setActiveHashtag(undefined);
         if (json.message) {
           setMessage(json.message);
         }
@@ -147,16 +151,16 @@ export default function Home() {
           <div className="relative z-10 max-w-3xl space-y-4">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-rose-50 border border-rose-200/80 text-rose-700 text-xs font-semibold">
               <Sparkles className="w-3.5 h-3.5 text-rose-500" />
-              <span>نظام جمع وتحليل ريلز إنستغرام الذكي | Instagram Reel Engine</span>
+              <span>نظام جمع وتحليل ريلز إنستغرام بالموضوع | Subject-Based Reel Engine</span>
             </div>
 
             <h1 className="text-2xl sm:text-4xl font-extrabold tracking-tight text-zinc-900 leading-tight">
-              جمع معلومات فيديوهات الإنستغرام (Reels) <br className="hidden sm:block" />
-              <span className="insta-gradient-text">ضمن فترة زمنية محددة بدقة عالية</span>
+              استخراج ريلز إنستغرام <br className="hidden sm:block" />
+              <span className="insta-gradient-text">حسب موضوع البحث أو المجال المطلوب</span>
             </h1>
 
             <p className="text-sm sm:text-base text-zinc-600 leading-relaxed">
-              منصة متطورة لاستخراج وتنظيم بيانات مقاطع الريلز، تتيح لك استخراج رابط كل فيديو وتاريخ نشره ونص الـ Caption بدقة كاملة، مع الفلترة الزمنية والبحث الفوري وتصدير النتائج بصيغ متعددة.
+              ابحث مباشرة بأي موضوع أو فكرة (مثل: ذكاء اصطناعي، قهوة مختصة، عقارات، سيارات، لياقة، تسويق) لاستخراج رابط كل فيديو وتاريخ النشر والـ Caption فورياً دون اشتراط تاريخ أو وقت محدد.
             </p>
 
             {/* The 3 Core Requirements Highlights */}

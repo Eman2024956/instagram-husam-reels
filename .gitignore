@@ -30,8 +30,27 @@ yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
 
-# env files (can opt-in for committing if needed)
+# env and credential files
+.env
+*.env
 .env*
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# keys, certificates, keystores
+*.pem
+*.key
+*.keystore
+*.jks
+*.p12
+*.pfx
+serviceAccountKey.json
+firebase-adminsdk*.json
+
+# security audit reports containing sensitive diagnostics
+UNIVERSAL_SECURITY_AUDIT_REPORT.md.tmp
 
 # vercel
 .vercel
@@ -39,3 +58,4 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+

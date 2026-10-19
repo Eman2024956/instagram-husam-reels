@@ -164,6 +164,35 @@ export async function POST(req: NextRequest) {
     const searchTerm = (subject || query || keyword || "").trim();
     const token = userToken?.trim() || process.env.APIFY_API_TOKEN?.trim();
 
+    // Security API Authentication Check (APP_PASSWORD or JOB_SIGNING_SECRET)
+    const authHeader = req.headers.get("authorization");
+    const customKey = req.headers.get("x-api-key") || req.headers.get("x-app-password");
+    const jobSecret = req.headers.get("x-job-secret");
+
+    const expectedAppPassword = process.env.APP_PASSWORD?.trim();
+    const expectedJobSecret = process.env.JOB_SIGNING_SECRET?.trim();
+
+    if (authHeader || customKey) {
+      const bearer = authHeader?.startsWith("Bearer ") ? authHeader.slice(7).trim() : authHeader?.trim();
+      const provided = bearer || customKey?.trim();
+      if (expectedAppPassword && provided !== expectedAppPassword) {
+        console.warn("[SECURITY AUDIT] 401 Unauthorized: Invalid API security password provided.");
+        return NextResponse.json(
+          { success: false, error: "Unauthorized: Invalid API security password" },
+          { status: 401 }
+        );
+      }
+      console.log("[SECURITY AUDIT] Authenticated API request verified via App Password.");
+    }
+
+    if (jobSecret && expectedJobSecret && jobSecret.trim() !== expectedJobSecret) {
+      console.warn("[SECURITY AUDIT] 403 Forbidden: Invalid Job Signing Secret provided.");
+      return NextResponse.json(
+        { success: false, error: "Forbidden: Invalid Job Signing Secret" },
+        { status: 403 }
+      );
+    }
+
     console.log("[API DEBUG 1] Incoming Request Params:", {
       searchTerm,
       username,

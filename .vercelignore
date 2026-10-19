@@ -1,0 +1,42 @@
+# ==============================================================================
+# 🛡️ Vercel Deployment Ignore Rules (.vercelignore)
+# Prevents sensitive configuration, local scripts, and credentials from uploading
+# ==============================================================================
+
+# Version control & CI
+.git
+.github
+.gitignore
+
+# Environment variables & secrets (handled securely via Vercel Dashboard)
+.env
+*.env
+.env*
+.env.local
+.env.*.local
+
+# Private Keys, Certificates, Keystores
+*.pem
+*.key
+*.keystore
+*.jks
+*.p12
+*.pfx
+serviceAccountKey.json
+firebase-adminsdk*.json
+
+# Security audit scripts and temp diagnostic files
+universal_security_audit.sh
+*.sh
+*.tmp
+
+# Debug and runtime logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# Testing & Coverage
+/coverage
+.nyc_output
